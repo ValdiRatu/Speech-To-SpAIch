@@ -4,10 +4,12 @@ import { PATH } from "../../utils/Paths";
 
 export class SpeechRecorder {
   private static audioIO: undefined | IoStreamRead
+  /**
+   * TODO: make this more dynamic using naudiondon's getDevices()
+   */
   private static defaultAudioOptions: AudioOptions = {
     sampleRate: 44100,
     channelCount: 1,
-    // channelCount: 1, // check this
     sampleFormat: SampleFormat16Bit,
     deviceId: 3, // Microphone  
     closeOnError: true,
@@ -33,12 +35,8 @@ export class SpeechRecorder {
       bitDepth: this.defaultAudioOptions.sampleFormat,
     })
 
-    this.audioIO.pipe(fileStream)
-
-    /**
-     * Because for some reason, there is no built in way to mute
-     * naudiodon's logs so we have to resort to this :pensive:
-     */
+    this.audioIO.pipe(fileStream).pipe
+    
     this.audioIO.start();
 
     return fileName;
